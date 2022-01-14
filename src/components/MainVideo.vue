@@ -1,8 +1,6 @@
 <template>
-
     <div class="video">
-        
-        <img class="coverImage" :src="video.coverImage">
+        <router-link :to="{path: '/watch', query: {id: this.video.id}}"><img class="coverImage" @mouseover="hoverForCoverImage = true" @mouseleave="hoverForCoverImage = false" :src="getCoverImage"></router-link>
         <div class="videoInformation">
             <div class="ownerImageDiv">
                 <img class="ownerImage" :src="video.ownerImage">
@@ -15,7 +13,6 @@
                     <span class="publishDateInMonth">{{ video.publishDateInMonth}} ay önce</span>
                 </div>
             </div>
-            
         </div>
     </div>
     
@@ -23,12 +20,28 @@
 
 <script>
 export default {
-    name: "VideoInfo",
+    name: "MainVideo",
     props: {
         video: Object
     },
+    data() {
+        return {
+            coverImageSource: this.video.coverImage,
+            hoverForCoverImage: false
+        }
+    },
     mounted(){
         console.log(this.video)
+    },
+    computed: {
+        getCoverImage() {
+            if (this.hoverForCoverImage == true){
+                return this.video.hoverImage
+            } else {
+                return this.video.coverImage
+            }
+        }
+
     }
     
 }
@@ -38,7 +51,7 @@ export default {
 
 .video {
     display: flex;
-    padding: 5px;
+    padding: 10px;
     flex-direction: column;
     width: 360px;
     height: 300px;
@@ -67,6 +80,7 @@ export default {
 }
 
 .ownerImage {
+    margin-top: 3px;
     width: 36px;
     height: 36px;
     border-radius: 50%;

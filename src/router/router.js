@@ -1,7 +1,8 @@
 import VueRouter from "vue-router";
 import Vue from "vue";
-import VideoHomePage from "@/views/videohomepage"
-
+import Main from "@/views/Main"
+import Favorites from "@/views/Favorites"
+import Watch from "@/views/Watch"
 
 Vue.use(VueRouter)
 
@@ -9,7 +10,9 @@ Vue.use(VueRouter)
 const router = new VueRouter({
     mode: "history",
     routes: [
-        {path: "/", component: VideoHomePage},
+        {path: "/", component: Main},
+        {path: "/favorites/:userid", component: Favorites},
+        {path: "/watch", component: Watch}
     ]
 })
 
